@@ -1,3 +1,6 @@
-# sacrifice-sanctuary
+# Sacrifice Sanctuary: Giddy Up-Despair
 
-Death game visual novel built in Ren'py
+![](/game/gui/main_menu.png)
+
+A death game visual novel, built using Ren'py.
+
