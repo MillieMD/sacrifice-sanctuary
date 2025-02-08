@@ -11,11 +11,16 @@ default bleep = True
 
 init python:
 
-    renpy.music.register_channel("Bleep", mixer="Voice Beeps")
+    renpy.music.register_channel("Bleep", mixer="voice", tight=True, buffer_queue=True)
 
     def beepHT(event, **kwargs):
         if event == "show":
-            renpy.music.play("beep1.ogg", channel="Bleep", loop=True)
+            renpy.music.queue("beep1.ogg", channel="Bleep", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="Bleep")
+    def beepPK(event, **kwargs):
+        if event == "show":
+            renpy.music.queue("beep1.ogg", channel="Bleep", loop=True)
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="Bleep")
 
@@ -23,11 +28,11 @@ init python:
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define ht = Character("Helpful Tips", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)]) #, callback=beepHT red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
+define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepHT) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
 define uk = Character("???", color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)])
 define np = Character("Pandora", color="2092C8", who_outlines=[(2, "0284BC", 0, 0)], what_color="0784B9", what_outlines=[(1, "02648C", 0, 0)], alt="Pandora thoughts")
 
-define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
+define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepPK)
 define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
 define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
 define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
