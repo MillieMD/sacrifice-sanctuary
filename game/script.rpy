@@ -11,7 +11,7 @@ default bleep = True
 
 init python:
 
-    renpy.music.register_channel("Bleep", mixer="voice")
+    renpy.music.register_channel("Bleep", mixer="Voice Beeps")
 
     def beepHT(event, **kwargs):
         if event == "show":
