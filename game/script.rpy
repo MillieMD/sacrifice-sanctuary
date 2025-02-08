@@ -8,31 +8,31 @@ define flashbulb = Fade(0.2, 0.0, 0.4, color='#dddddd')
 
 default bleep = True
 
+define PHFile = "beep1.ogg"
+
 
 init python:
 
     renpy.music.register_channel("Bleep", mixer="voice", tight=True, buffer_queue=True)
 
-    def beepHT(event, **kwargs):
-        if event == "show":
-            renpy.music.queue("beep1.ogg", channel="Bleep", loop=True)
+    def beepVoice(event, interact=True, SFile="beep1.ogg", **kwargs):
+        if not interact:
+            return
+
+        if event == "show_done":
+            renpy.music.queue(SFile, channel="Bleep", loop=True)
         elif event == "slow_done" or event == "end":
-            renpy.music.stop(channel="Bleep")
-    def beepPK(event, **kwargs):
-        if event == "show":
-            renpy.music.queue("beep1.ogg", channel="Bleep", loop=True)
-        elif event == "slow_done" or event == "end":
-            renpy.music.stop(channel="Bleep")
+            renpy.music.stop(channel="Bleep", fadeout=0.2)
 
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepHT) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
-define uk = Character("???", color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)])
+define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
+define uk = DynamicCharacter('UKName', color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)], callback=beepVoice, cb_Sfile=PHFile)
 define np = Character("Pandora", color="2092C8", who_outlines=[(2, "0284BC", 0, 0)], what_color="0784B9", what_outlines=[(1, "02648C", 0, 0)], alt="Pandora thoughts")
 
-define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepPK)
+define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice) #, cb_SFile="bang.wav" use this to customise file per char
 define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
 define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
 define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)])
@@ -821,6 +821,12 @@ label pandora_bin:
     if flagA == 0:
 
         if pandoraroomread[7] == 1:
+            
+            #$ UKName = 'pleasework'
+            #uk "dsfvadfbvdafbvdafbva" (cb_SFile="click.wav")
+            #uk "dsfvadfbvdafbvdafbva" (cb_SFile="bang.wav")
+            #uk "dsfvadfbvdafbvdafbva" (cb_SFile="beep1.ogg")
+
             pk "A disappointingly empty bin."
 
             jump draw_pandora_room
