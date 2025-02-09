@@ -15,12 +15,14 @@ init python:
 
     renpy.music.register_channel("Bleep", mixer="voice", tight=True, buffer_queue=True)
 
-    def beepVoice(event, interact=True, SFile="beep1.ogg", **kwargs):
+    def beepVoice(event, interact=True, SFile="beep1.ogg", Char="", **kwargs):
         if not interact:
             return
 
-        if event == "show_done":
-            renpy.music.queue(SFile, channel="Bleep", loop=True)
+
+        if event == "show":
+            SFile = Char + "_" + str(renpy.random.randint(1,3)) + ".ogg"
+            renpy.music.queue(SFile, channel="Bleep", loop=False)
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="Bleep", fadeout=0.4)
 
@@ -32,7 +34,7 @@ define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0
 define uk = DynamicCharacter('UKName', color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)], callback=beepVoice, cb_Sfile=PHFile)
 define np = Character("Pandora", color="2092C8", who_outlines=[(2, "0284BC", 0, 0)], what_color="0784B9", what_outlines=[(1, "02648C", 0, 0)], alt="Pandora thoughts")
 
-define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice) #, cb_SFile="bang.wav" use this to customise file per char
+define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_SFile="click.ogg", cb_Char="pandora") # use this to customise file per char
 define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
 define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
 define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
