@@ -21,8 +21,11 @@ init python:
 
 
         if event == "show":
-            SFile = Char + "_" + str(renpy.random.randint(1,3)) + ".ogg"
-            renpy.music.queue(SFile, channel="Bleep", loop=False)
+            beep = 0
+            while beep < 100:
+                SFile = Char + "_" + str(renpy.random.randint(1,3)) + ".ogg"
+                renpy.music.queue(SFile, channel="Bleep", loop=False)
+                beep += 1
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="Bleep", fadeout=0.4)
 
