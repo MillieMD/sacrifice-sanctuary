@@ -34,31 +34,31 @@ init python:
 # name of the character.
 
 define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
-define uk = DynamicCharacter('UKName', color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)], callback=beepVoice, cb_Sfile=PHFile)
+define uk = DynamicCharacter('UKName', color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)], callback=beepVoice, cb_Sfile=PHFile, cb_Char="pandora")
 define np = Character("Pandora", color="2092C8", who_outlines=[(2, "0284BC", 0, 0)], what_color="0784B9", what_outlines=[(1, "02648C", 0, 0)], alt="Pandora thoughts")
 
-define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_SFile="click.ogg", cb_Char="pandora") # use this to customise file per char
-define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
-define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
-define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice)
+define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="pandora") # use this to customise file per char
+define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="darya")
+define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="emilio")
+define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="florus")
 
-define bl = Character("Belinda", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice)
-define ds = Character("Dexter", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice)
-define av = Character("Ainsley", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice)
+define bl = Character("Belinda", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice, cb_Char="belinda")
+define ds = Character("Dexter", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice, cb_Char="dexter")
+define av = Character("Ainsley", color="22B14C", who_outlines=[(2, "188638", 0, 0)], what_outlines=[(1, "506C58", 0, 0)], callback=beepVoice, cb_Char="ainsley")
 
-define rh = Character("Ratna", color="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice)
-define nl = Character("Nikolas", color="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice)
-define ff = Character("Fabrice", color ="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice)
+define rh = Character("Ratna", color="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice, cb_Char="ratna")
+define nl = Character("Nikolas", color="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice, cb_Char="nikolas")
+define ff = Character("Fabrice", color ="ED1C24", who_outlines=[(2, "B1171D", 0, 0)], what_outlines=[(1, "6C4D4E", 0, 0)], callback=beepVoice, cb_Char="fabrice")
 
-define of = Character("Osanne", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice)
-define ka = Character("Kevin", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice)
-define vl = Character("Valkyrie", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice)
+define of = Character("Osanne", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice, cb_Char="osanne")
+define ka = Character("Kevin", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice, cb_Char="kevin")
+define vl = Character("Valkyrie", color="A349A4", who_outlines=[(2, "783678", 0, 0)], what_outlines=[(1, "725872", 0, 0)], callback=beepVoice, cb_Char="valkyrie")
 
-define cm = Character("Carwyn", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice)
-define nt = Character("Nin", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice)
-define dh = Character("Dakota", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice)
+define cm = Character("Carwyn", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice, cb_Char="carwyn")
+define nt = Character("Nin", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice, cb_Char="nin")
+define dh = Character("Dakota", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)]) #, callback=beepVoice, cb_Char="emilio"
 
-define mm = Character("Maizey", color="7A4C0E", who_outlines=[(2, "523309", 0, 0)], what_outlines=[(1, "52493E", 0, 0)], callback=beepVoice)
+define mm = Character("Maizey", color="7A4C0E", who_outlines=[(2, "523309", 0, 0)], what_outlines=[(1, "52493E", 0, 0)], callback=beepVoice, cb_Char="maizey")
 
 #~TRANSFORMS~#
 transform centre:
@@ -1217,10 +1217,10 @@ label flodoor:
                 $ UKName = "Man with Flowers"
 
                 show florus neutral with dissolve2
-                uk "... hello?"
+                uk "... hello?" (cb_Char="florus")
                 hide florus with fastDissolve
 
-                show florus neutral at twoleft
+                show florus flinch at twoleft
 
                 show darya yeah2 at tworight
 
@@ -1228,11 +1228,13 @@ label flodoor:
 
                 dk "{piracow}AHOY!{/piracow}"
 
-                show florus flinch with fastDissolve
-                uk "!?"
-                show florus neutral with fastDissolve
+                #show florus flinch with fastDissolve
+                uk "!?" (cb_Char="florus")
 
-                show darya neutral with fastDissolve
+                show florus neutral
+                show darya neutral 
+                
+                with fastDissolve
                 dk "{piracow}What be your name?{/piracow}"
 
                 show florus confused with fastDissolve
@@ -1750,14 +1752,14 @@ label dakdoor:
             $ UKName = "Cowboy...?"
 
             show emilio happy with dissolve2
-            uk "{piracow}Howdy partner!{/piracow}"
+            uk "{piracow}Howdy partner!{/piracow}" (cb_Char="emilio")
 
             pk "Hello."
             np "My eyes are drawn the NURF revolver and cowboy getup as annoyance forms in my gut."
             np "Please tell me he isn't like a second Darya..."
 
             show emilio welcome with fastDissolve
-            uk "{piracow}C'mon in, can't leave ya out in the corridor like that.{/piracow}"
+            uk "{piracow}C'mon in, can't leave ya out in the corridor like that.{/piracow}" (cb_Char="emilio")
 
             np "On the one hand, since I have little idea of what's going on this could easily be a trap. Not to mention that I {i}really{/i} don't want to deal with another freaky LARPer right now..."
             np "But on the other hand, I don't want to upset him in case he's dangerous - so going along with this but keeping a cautious ear up is probably best."
@@ -1783,11 +1785,11 @@ label dakdoor:
             hide dakota with dissolve2
 
             show emilio neutral with dissolve2
-            uk "{piracow}Make yerself at home. {/piracow}"
+            uk "{piracow}Make yerself at home. {/piracow}" (cb_Char="emilio")
 
             pk "There- there is a horse."
 
-            uk "{piracow}That'll be Dakota, my loyal steed and truest friend.{/piracow}"
+            uk "{piracow}That'll be Dakota, my loyal steed and truest friend.{/piracow}" (cb_Char="emilio")
             hide emilio with dissolve2
             show dakota neutral with dissolve2
             dh "Neigh."
@@ -1798,14 +1800,14 @@ label dakdoor:
             pk "Also, quick question: where are you from?"
 
             show emilio confuzz with fastDissolve
-            uk "Uh, Yorkshire?"
+            uk "Uh, Yorkshire?" (cb_Char="emilio")
 
             np "So the Texas accent is fake."
             pk "Would it be possible... for you to use your normal voice?"
             np "I try not to sound too exasperated."
 
             show emilio neutral with fastDissolve
-            uk "{piracow}Of course-{/piracow} of course."
+            uk "{piracow}Of course-{/piracow} of course." (cb_Char="emilio")
 
             np "Thankfully he complies without pushback, and replaces his cowboy accent with a much more natural-sounding Yorkshire one."
 
@@ -4847,7 +4849,7 @@ label daryaburstpandoraroom:
     scene bg daryaatdoor with hpunch
 
     $ UKName = "Pirate!?"
-    uk "{piracow}{size=+20}AHOY!!!{/size}{/piracow}" (cb_SFile="beep1.ogg")
+    uk "{piracow}{size=+20}AHOY!!!{/size}{/piracow}" (cb_Char="darya")
     #uk "testing testing"
     #$ UKName = "test"
     #uk "test 2" ^<- all works, leaving in case cuture me needs to read it for any reason
