@@ -1,24 +1,31 @@
 ﻿# The script of the game goes in this file.
 
-define fastDissolve = Dissolve(0.3)
-define dissolve2 = Dissolve(0.6)
-define FD2 = { "master" : Dissolve(0.2) }
+##################
+#~~~~~~~~~~~~~~~~#
+# SETUP AND PREP #
+#~~~~~~~~~~~~~~~~#
+##################
 
-define flashbulb = Fade(0.2, 0.0, 0.4, color='#dddddd')
+
+
+################
+# DECLARATIONS #
+################
 
 default bleep = True
 
 define PHFile = "beep1.ogg"
 
 
-init python:
+#~Callbacks~#
 
-    renpy.music.register_channel("Bleep", mixer="voice", tight=True, buffer_queue=True)
+init python: 
 
-    def beepVoice(event, interact=True, SFile="beep1.ogg", Char="", **kwargs):
+    renpy.music.register_channel("Bleep", mixer="voice", tight=True, buffer_queue=True) #setting up the voice bleeps to play on a new channel that uses the pre-built 'voice' volume slider
+
+    def beepVoice(event, interact=True, SFile="beep1.ogg", Char="", **kwargs): #for characters who have a set of 3 randomised beep sounds for their voice
         if not interact:
             return
-
 
         if event == "show":
             beep = 0
@@ -30,14 +37,32 @@ init python:
             renpy.music.stop(channel="Bleep", fadeout=0.4)
 
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+    def singleCall(event, interact=True, SFile="beep1.ogg", **kwargs): #for characters who make a single noise as their entire line (eg horse neigh)
+        if not interact:
+            return
 
-define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
+        if event == "show":
+            renpy.music.queue(SFile, channel="Bleep", loop=False)
+
+
+    def narratorCall(event, interact=True, **kwargs): #for characters who use a single beep sound for their voice
+        if not interact:
+            return
+
+        if event == "show":
+            renpy.music.queue("beep1.ogg", channel="Bleep", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="Bleep", fadeout=0.4)
+
+
+
+#~Characters~#
+
+define ht = Character("System", color="3366FF", who_outlines=[(2, "02648C", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=narratorCall) # red=ED1C24, green=22B14C, purple=A349A4, orange=FF7F27, blue=00A2E8
 define uk = DynamicCharacter('UKName', color="666666", who_outlines=[(2, "333333", 0, 0)], what_outlines=[(1, "777777", 0, 0)], callback=beepVoice, cb_Sfile=PHFile, cb_Char="pandora")
 define np = Character("Pandora", color="2092C8", who_outlines=[(2, "0284BC", 0, 0)], what_color="0784B9", what_outlines=[(1, "02648C", 0, 0)], alt="Pandora thoughts")
 
-define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="pandora") # use this to customise file per char
+define pk = Character("Pandora", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="pandora")
 define dk = Character("Darya", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="darya")
 define eb = Character("Emilio", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="emilio")
 define fc = Character("Florus", color="00A2E8", who_outlines=[(2, "0284BC", 0, 0)], what_outlines=[(1, "5B707B", 0, 0)], callback=beepVoice, cb_Char="florus")
@@ -56,11 +81,13 @@ define vl = Character("Valkyrie", color="A349A4", who_outlines=[(2, "783678", 0,
 
 define cm = Character("Carwyn", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice, cb_Char="carwyn")
 define nt = Character("Nin", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=beepVoice, cb_Char="nin")
-define dh = Character("Dakota", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)]) #, callback=beepVoice, cb_Char="emilio"
+define dh = Character("Dakota", color="FF7F27", who_outlines=[(2, "C4621F", 0, 0)], what_outlines=[(1, "7A6659", 0, 0)], callback=singleCall, cb_SFile="neigh.mp3")
 
 define mm = Character("Maizey", color="7A4C0E", who_outlines=[(2, "523309", 0, 0)], what_outlines=[(1, "52493E", 0, 0)], callback=beepVoice, cb_Char="maizey")
 
-#~TRANSFORMS~#
+
+#~Transforms~#
+
 transform centre:
     xalign 0.5
     yalign 1.0
@@ -80,11 +107,23 @@ transform threeleft:
 transform threeright:
     xpos 1000
     yalign 1.0
-#the threes are unlikely to be used bc they make the screen very cramped due to the large sprite size
+
+
+define fastDissolve = Dissolve(0.3) #very fast fade effect
+define dissolve2 = Dissolve(0.6) #medium fast fade effect
+define FD2 = { "master" : Dissolve(0.2) } #used to change character sprites mid line
+
+define flashbulb = Fade(0.2, 0.0, 0.4, color='#dddddd')
+
+
+#(the threes are unlikely to be used bc they make the screen very cramped due to the large sprite size)
+
+
 
 #############
 # VARIABLES #
 #############
+
 default teamcol = "n" #for setting team colour for when that matters for the UI
 default uivis = True #dont entirely remember when this is used
 default wiggle = True #arrow wiggle variable for moving arrows in the halls
@@ -125,6 +164,7 @@ default ch1murder_text = [
 
 
 #~flags~#
+
 default daryaroom = False #is darya in the room right now?
 
 default flagA = 0 #simple progression 1
@@ -135,6 +175,7 @@ default day = 1 #in case we need this for optionally-out-of-order event shenanig
 
 
 #~locations~#
+
 default currentlocation = "" #where you currently are
 
 default pandoraroomread = [0,0,0,0,0,0,0,0,0,0,0] #0=door, 1=wardrobe, 2=bed, 3=table, 4=chair, 5=note, 6=drawers, 7=bin, 8=cactus, 9=clock, 10=speaker
@@ -159,11 +200,13 @@ default corrH1read = [0] #0=exit door
 
 
 #~interactable totals~#
+
 default asktotal = 0 #generally talking to people total
 default roomtotal = 0 #generally interacting with things total
 
 
 #~Profiles Data~#
+
 default allowedP = True 
 default pactive = False
 default profileselect = 0
@@ -181,11 +224,12 @@ default statuses = ["Alive", "Alive", "Alive", "Alive", "Alive", "Alive", "Alive
 
 
 #~Map Stuff~#
-default mactive = False
 
-default strintloc = "0"
-default bigx = 0
-default bigy = 0
+default mactive = False #map starts disabled
+
+default strintloc = "0" #current location as a string (i think)
+default bigx = 0 #x pos of the map icon
+default bigy = 0 #y pos of the map icon
 
 default dmap1 = { #compares current location to this dict lookup, then the number string is converted into co-ords for the character position dot
     "corrA1" : "08100350",
@@ -205,8 +249,12 @@ default dmap1 = { #compares current location to this dict lookup, then the numbe
 }
 
 
+
+
 #########################
-# The game starts here. #
+#~~~~~~~~~~~~~~~~~~~~~~~#
+# THE GAME STARTS HERE! #
+#~~~~~~~~~~~~~~~~~~~~~~~#
 #########################
 
 image splash1 = "splash1.png"
@@ -233,7 +281,7 @@ label splashscreen:
 
     return
 
-screen keyscr: #code source: https://lemmasoft.renai.us/forums/viewtopic.php?f=8&t=22458&p=283744&hilit=movie+skip#p283744
+screen keyscr: #code source: https://lemmasoft.renai.us/forums/viewtopic.php?f=8&t=22458&p=283744&hilit=movie+skip#p283744, disables skipping video cutscenes with every button but esc
     key "K_RETURN" action Hide("nonexistent_screen")
     key "K_KP_ENTER" action Hide("nonexistent_screen")
     key "K_SPACE" action Hide("nonexistent_screen")
@@ -249,10 +297,9 @@ screen keyscr: #code source: https://lemmasoft.renai.us/forums/viewtopic.php?f=8
     key "K_ESCAPE" action Return("smth")
 
 label start:
-    stop music
+    stop music #to prevent title screen music from bleeding in
 
-
-    $ quick_menu = False
+    $ quick_menu = False #hide quick menu for the cinematic experience
     
     #intro stuff goes here
 
@@ -263,7 +310,7 @@ label start:
 
     hide screen keyscr
 
-    #play ch1 screen - dont actually it's out of place here, it should go after the intro section
+    #play ch1 screen - dont actually it's out of place here, it should go after the prologue
     #$ renpy.movie_cutscene("chapter1.ogv")
 
     scene black
@@ -281,7 +328,7 @@ label start:
 
     image PR = "bg pandora_full.png"
 
-    window hide dissolve
+    window hide dissolve #hiding text box 
 
     scene black with dissolve
 
@@ -290,7 +337,7 @@ label start:
     show PR with dissolve:
         blur 30
 
-    #np "My vision is still blurry from waking up."
+    #np "My vision is still blurry from waking up." removed as it now happens with animation
 
     pause 0.2
 
@@ -305,9 +352,9 @@ label start:
 
     scene bg pandora_full with fade
 
-    window auto
+    window auto #returning text box to normal functions
 
-    np "I blink to clear my head and get a better look at where I find myself. {alt}Description: The room appears to be some sort of dorm, to the left is a bed and a wardrobe, at the back of the room is a small bin, a speaker on the wall, a table with a note on it and a chair. To the right is a metal door, a chest of draws with a cactus on it, and a clock mounted on the wall. The walls appear to be made out of metal plates.{/alt}"
+    np "I blink to clear my head and get a better look at where I find myself. {alt}Description: The room appears to be some sort of dorm, to the left is a bed and a wardrobe, at the back of the room is a small bin, a speaker on the wall, a table with a note on it and a chair. To the right is a metal door, a chest of draws with a cactus on it, and a clock mounted on the wall. The walls appear to be made out of metal plates. A fluorescent light shines from above.{/alt}"
     pk "Since I don't know anything right now, I should check out everything in this room and see if there's anything that tells me where I am."
 
     #bl "test"
